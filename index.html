@@ -1,11 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Git e Github</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scanner de Papel</title>
 </head>
 <body>
-    <h1>ola </h1>
+  <h1>Scanner de Papel</h1>
+  <video id="video" width="640" height="480" autoplay></video>
+  <button id="capture-btn">Capturar</button>
+  <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+
+  <script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const captureButton = document.getElementById('capture-btn');
+
+    // Acessar a câmera do dispositivo
+    async function setupCamera() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = stream;
+      } catch (err) {
+        console.error('Erro ao acessar a câmera:', err);
+      }
+    }
+
+    // Capturar imagem da câmera
+    captureButton.addEventListener('click', () => {
+      const context = canvas.getContext('2d');
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      
+      // Aqui você pode enviar a imagem para o backend para processamento adicional
+    });
+
+    // Inicializar a câmera quando a página carregar
+    window.addEventListener('load', () => {
+      setupCamera();
+    });
+  </script>
 </body>
 </html>
