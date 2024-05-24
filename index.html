@@ -3,62 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scanner de Papel</title>
+  <title>Adicionar 11 a um Número</title>
   <style>
-    #canvas {
-      display: block;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    input, button {
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 16px;
+    }
+    #result {
       margin-top: 10px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <h1>Scanner de Papel</h1>
-  <video id="video" width="640" height="480" autoplay></video>
-  <button id="capture-btn">Capturar</button>
-  <canvas id="canvas" width="640" height="480"></canvas>
-  <img id="captured-img" style="display: none;" />
+  <h1>Adicionar 11 a um Número</h1>
+  <input type="number" id="number-input" placeholder="Digite um número">
+  <button id="add-btn">Adicionar 11</button>
+  <div id="result"></div>
 
   <script>
-    const video = document.getElementById('video');
-    const canvas = document.getElementById('canvas');
-    const captureButton = document.getElementById('capture-btn');
-    const capturedImg = document.getElementById('captured-img');
+    const inputField = document.getElementById('number-input');
+    const addButton = document.getElementById('add-btn');
+    const resultDiv = document.getElementById('result');
 
-    // Acessar a câmera do dispositivo
-    async function setupCamera() {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        video.srcObject = stream;
-      } catch (err) {
-        console.error('Erro ao acessar a câmera:', err);
-        alert('Erro ao acessar a câmera: ' + err.message);
+    addButton.addEventListener('click', () => {
+      const inputValue = parseFloat(inputField.value);
+      if (!isNaN(inputValue)) {
+        const result = inputValue + 11;
+        resultDiv.textContent = `Esta é a soma: ${result}`;
+      } else {
+        resultDiv.textContent = 'Por favor, insira um número válido.';
       }
-    }
-
-    // Capturar imagem da câmera
-    captureButton.addEventListener('click', () => {
-      const context = canvas.getContext('2d');
-      context.drawImage(video, 0, 0, canvas.width, canvas.height);
-      
-      // Exibir a imagem capturada
-      const dataURL = canvas.toDataURL('image/png');
-      capturedImg.src = dataURL;
-      capturedImg.style.display = 'block';
-
-      // Aqui você pode enviar a imagem para o backend para processamento adicional
-      // Por exemplo:
-      // fetch('/upload', {
-      //   method: 'POST',
-      //   body: JSON.stringify({ image: dataURL }),
-      //   headers: { 'Content-Type': 'application/json' }
-      // }).then(response => response.json())
-      //   .then(data => console.log(data))
-      //   .catch(error => console.error('Erro ao enviar a imagem:', error));
-    });
-
-    // Inicializar a câmera quando a página carregar
-    window.addEventListener('load', () => {
-      setupCamera();
     });
   </script>
 </body>
