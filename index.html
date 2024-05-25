@@ -4,42 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Adicionar 11 a um Número</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    input, button {
-      margin: 10px 0;
-      padding: 10px;
-      font-size: 16px;
-    }
-    #result {
-      margin-top: 10px;
-      font-weight: bold;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <h1>Adicionar 11 a um Número</h1>
   <input type="number" id="number-input" placeholder="Digite um número">
   <button id="add-btn">Adicionar 11</button>
   <div id="result"></div>
-
-  <script>
-    const inputField = document.getElementById('number-input');
-    const addButton = document.getElementById('add-btn');
-    const resultDiv = document.getElementById('result');
-
-    addButton.addEventListener('click', () => {
-      const inputValue = parseFloat(inputField.value);
-      if (!isNaN(inputValue)) {
-        const result = inputValue + 11;
-        resultDiv.textContent = `Esta é a soma: ${result}`;
-      } else {
-        resultDiv.textContent = 'Por favor, insira um número válido.';
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
